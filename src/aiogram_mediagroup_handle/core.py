@@ -8,18 +8,26 @@ from aiogram.dispatcher.event.bases import UNHANDLED
 from aiogram.enums import ContentType
 from aiogram.fsm.storage.base import BaseEventIsolation, BaseStorage, StorageKey
 from aiogram.fsm.storage.memory import SimpleEventIsolation
-from aiogram.types import Audio, Document, Message, PhotoSize, Video
+from aiogram.types import Message
 
-from aiogram_mediagroup_handle._types import Handler
+from aiogram_mediagroup_handle._types import Handler, PhotoSize, Document, Video, Audio
 from aiogram_mediagroup_handle.media import MediaGroup
 from aiogram_mediagroup_handle.middleware import MediaGroupMiddleware
 
 DEFAULT_TIMEOUT = 0.3
 _action_map = {
-    ContentType.AUDIO: lambda self, message: self._audio.append(message.audio),
-    ContentType.DOCUMENT: lambda self, message: self._documents.append(message.document),
-    ContentType.PHOTO: lambda self, message: self._photos.append(message.photo),
-    ContentType.VIDEO: lambda self, message: self._video.append(message.video),
+    ContentType.AUDIO: lambda self, message: self._audio.append(
+        Audio.model_validate(message.audio.model_dump())
+    ),
+    ContentType.DOCUMENT: lambda self, message: self._documents.append(
+        Document.model_validate(message.document.model_dump())
+    ),
+    ContentType.PHOTO: lambda self, message: self._photos.append(
+        [PhotoSize.model_validate(photo.model_dump()) for photo in message.photo]
+    ),
+    ContentType.VIDEO: lambda self, message: self._video.append(
+        Video.model_validate(message.video.model_dump()),
+    ),
 }
 
 __all__ = [
