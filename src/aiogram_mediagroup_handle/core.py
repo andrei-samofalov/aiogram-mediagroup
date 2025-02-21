@@ -10,7 +10,7 @@ from aiogram.fsm.storage.base import BaseEventIsolation, BaseStorage, StorageKey
 from aiogram.fsm.storage.memory import SimpleEventIsolation
 from aiogram.types import Message
 
-from aiogram_mediagroup_handle._types import Handler, PhotoSize, Document, Video, Audio
+from aiogram_mediagroup_handle._types import Audio, Document, Handler, PhotoSize, Video
 from aiogram_mediagroup_handle.media import MediaGroup
 from aiogram_mediagroup_handle.middleware import MediaGroupMiddleware
 

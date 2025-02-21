@@ -1,7 +1,11 @@
 import typing as t
 
-from aiogram.types import Message, TelegramObject, PhotoSize as APhotoSize, Document as ADocument, \
-    Video as AVideo, Audio as AAudio
+from aiogram.types import Audio as AAudio
+from aiogram.types import Document as ADocument
+from aiogram.types import Message
+from aiogram.types import PhotoSize as APhotoSize
+from aiogram.types import TelegramObject
+from aiogram.types import Video as AVideo
 
 Handler = t.Callable[[TelegramObject, dict[str, t.Any]], t.Awaitable[t.Any]]
 

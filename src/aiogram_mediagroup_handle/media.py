@@ -2,9 +2,14 @@ import typing as t
 from dataclasses import dataclass, field
 
 from aiogram.enums import ContentType
-from aiogram.types import InputMediaAudio, InputMediaDocument, InputMediaPhoto, InputMediaVideo
+from aiogram.types import (
+    InputMediaAudio,
+    InputMediaDocument,
+    InputMediaPhoto,
+    InputMediaVideo,
+)
 
-from aiogram_mediagroup_handle._types import PhotoSize, Audio, Document, Video
+from aiogram_mediagroup_handle._types import Audio, Document, PhotoSize, Video
 
 MediaGroupType = list[InputMediaAudio | InputMediaDocument | InputMediaPhoto | InputMediaVideo]
 MediaType = list[PhotoSize] | Audio | Document | Video
