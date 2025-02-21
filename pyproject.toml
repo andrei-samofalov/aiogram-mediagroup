@@ -7,7 +7,7 @@ packages = ["src/aiogram_mediagroup_handle"]
 
 [project]
 name = "aiogram-mediagroup-handle"
-version = "0.1.2"
+version = "0.1.3"
 description = "aiogram media group observer"
 readme = "README.md"
 authors = [
@@ -25,6 +25,7 @@ Repository = "https://github.com/andrei-samofalov/aiogram-mediagroup"
 [dependency-groups]
 dev = [
     "isort>=6.0.0",
+    "loguru>=0.7.3",
     "ruff>=0.9.7",
 ]
 [tool.ruff.format]
