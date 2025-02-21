@@ -32,6 +32,20 @@ class MediaGroup:
     documents: list[Document] = field(default_factory=list)
     video: list[Video] = field(default_factory=list)
 
+    def get_media(self) -> t.Iterator[MediaType]:
+        """Return media group iterator"""
+        return iter(self.photos + self.audio + self.documents + self.video)
+
+    def as_input_media(self) -> MediaGroupType:
+        """Return media group for sending via aiogram.Bot"""
+        return [
+            _media_mapping[_unpack_type(media)](
+                media=media[-1].file_id if isinstance(media, list) else media.file_id,
+                caption=self.caption if idx == 0 else None,
+            )
+            for idx, media in enumerate(self.get_media())
+        ]
+
     @property
     def content_type(self) -> str:
         """Return media group content type"""
