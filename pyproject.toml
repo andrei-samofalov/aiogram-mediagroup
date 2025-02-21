@@ -7,7 +7,7 @@ packages = ["src/aiogram_mediagroup_handle"]
 
 [project]
 name = "aiogram-mediagroup-handle"
-version = "0.1.1"
+version = "0.1.2"
 description = "aiogram media group observer"
 readme = "README.md"
 authors = [
