@@ -6,19 +6,25 @@ This library supports **aiogram v3 and above**.
 
 ## Overview
 
-`aiogram-mediagroup-handle` leverages FSMStorage from the aiogram dispatcher to collect and store media files in FSM data using `media_group_id`. It comes with some utilities:
-- **MediaGroupFilter** – A filter to detect media groups
-- **MediaGroupMiddleware** – Middleware for handling media groups
-- **MediaGroup** – A lightweight dataclass accessible in aiogram handlers
+`aiogram-mediagroup-handle` leverages the `aiogram.Dispatcher.storage`  
+to collect and store media files in FSM data by `media_group_id`.
 
-### MediaGroup Dataclass
+FSMStorage ensures data consistency and, combined with data serialization, allows any of 
+the known storage strategies to be used (not just in-memory).
+
+`aiogram-mediagroup-handle` comes with some utilities:
+- **MediaGroupFilter** – A filter to detect media groups.
+- **MediaGroup** – A lightweight dataclass object (the actual media group intake) accessible in 
+FSMStorage data dictionary by `media_group_id`.
+
+### MediaGroup Dataclass reference
 ```python
 from dataclasses import dataclass, field
 import typing as t
 from aiogram.types import PhotoSize, Audio, Document, Video
 from aiogram.enums import ContentType
 
-@dataclass
+@dataclass(slots=True, kw_only=True, frozen=True)
 class MediaGroup:
     """Lightweight media group representation."""
     caption: t.Optional[str] = None
@@ -29,7 +35,7 @@ class MediaGroup:
 
     @property
     def content_type(self) -> str:
-        """Returns the content type of the media group."""
+        """Return media group content type"""
         if self.photos:
             return ContentType.PHOTO
         if self.documents:
