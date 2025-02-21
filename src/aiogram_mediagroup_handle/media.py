@@ -27,3 +27,6 @@ class MediaGroup:
             return ContentType.VIDEO
 
         return ContentType.UNKNOWN
+
+    def __len__(self) -> int:
+        return len(self.photos) + len(self.audio) + len(self.documents) + len(self.video)

@@ -80,7 +80,7 @@ class MediaGroupObserver:
         """Dump media group to the storage."""
         async with self._get_context(message) as (context_key, storage_data):
             if (store := storage_data.get(self._raw(message.media_group_id))) is None:
-                return await handler(message, data)
+                return UNHANDLED
 
             if not store.is_ready(self._loop.time() - self._wait_for):
                 return UNHANDLED
@@ -107,7 +107,7 @@ class MediaGroupObserver:
             )
 
             await store.update_from_message(message, now)
-            await self._storage.update_data(context_key, data=data)
+            await self._storage.set_data(context_key, data=data)
 
     async def schedule_media(
         self, handler: Handler, message: Message, data: dict[str, t.Any],
