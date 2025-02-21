@@ -6,11 +6,7 @@ import typing as t
 from aiogram import Dispatcher
 from aiogram.dispatcher.event.bases import UNHANDLED
 from aiogram.enums import ContentType
-from aiogram.fsm.storage.base import (
-    BaseEventIsolation,
-    BaseStorage,
-    StorageKey
-)
+from aiogram.fsm.storage.base import BaseEventIsolation, BaseStorage, StorageKey
 from aiogram.fsm.storage.memory import SimpleEventIsolation
 from aiogram.types import Audio, Document, Message, PhotoSize, Video
 
@@ -129,11 +125,11 @@ class MediaGroupObserver:
 class MediaGroupStore:
     """Media message store"""
 
-    caption: t.Optional[str] = property(lambda self: self._caption)
-    photos: list[list[PhotoSize]] = property(lambda self: self._photos)
-    audio: list[Audio] = property(lambda self: self._audio)
-    documents: list[Document] = property(lambda self: self._documents)
-    video: list[Video] = property(lambda self: self._video)
+    caption: t.Optional[str] = property(lambda self: self._caption[:])
+    photos: list[list[PhotoSize]] = property(lambda self: self._photos[:])
+    audio: list[Audio] = property(lambda self: self._audio[:])
+    documents: list[Document] = property(lambda self: self._documents[:])
+    video: list[Video] = property(lambda self: self._video[:])
 
     def __init__(self, created_at: float, caption: t.Optional[str]) -> None:
         self._last_updated: float = created_at

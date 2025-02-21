@@ -7,16 +7,20 @@ packages = ["src/aiogram_mediagroup_handle"]
 
 [project]
 name = "aiogram-mediagroup-handle"
-version = "0.1.0"
+version = "0.1.1"
 description = "aiogram media group observer"
 readme = "README.md"
 authors = [
     { name = "andrei-samofalov", email = "andrei.e.samofalov@gmail.com" }
 ]
+keywords = ["aiogram", "media group", "album", "storage"]
 requires-python = ">=3.11"
 dependencies = [
     "aiogram>=3",
 ]
+
+[project.urls]
+Repository = "https://github.com/andrei-samofalov/aiogram-mediagroup"
 
 [dependency-groups]
 dev = [
@@ -27,4 +31,6 @@ dev = [
 quote-style = "single"
 
 [tool.isort]
+line_length = 88
 multi_line_output = 3
+include_trailing_comma = true

@@ -28,8 +28,8 @@ wheels = [
 ]
 
 [[package]]
-name = "aiogram-mediagroup"
-version = "0.1.0"
+name = "aiogram-mediagroup-handle"
+version = "0.1.1"
 source = { editable = "." }
 dependencies = [
     { name = "aiogram" },

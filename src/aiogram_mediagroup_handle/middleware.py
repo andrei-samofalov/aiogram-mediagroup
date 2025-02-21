@@ -4,10 +4,7 @@ from aiogram import BaseMiddleware
 from aiogram.types import Message
 
 from aiogram_mediagroup_handle import util
-from aiogram_mediagroup_handle._types import (
-    Handler,
-    MediaGroupObserverProtocol
-)
+from aiogram_mediagroup_handle._types import Handler, MediaGroupObserverProtocol
 
 
 class MediaGroupMiddleware(BaseMiddleware):
