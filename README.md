@@ -6,8 +6,8 @@ This library supports **aiogram v3 and above**.
 
 ## Overview
 
-`aiogram-mediagroup-handle` leverages the `aiogram.Dispatcher.storage`  
-to collect and store media files in FSM data by `media_group_id`.
+`aiogram-mediagroup-handle` leverages the `aiogram.Dispatcher.storage` to collect and store 
+media files in FSM data by `media_group_id`.
 
 FSMStorage ensures data consistency and, combined with data serialization, allows any of 
 the known storage strategies to be used (not just in-memory).
