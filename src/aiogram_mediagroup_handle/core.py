@@ -86,13 +86,13 @@ class MediaGroupObserver:
                 return UNHANDLED
 
             del storage_data[self._raw(message.media_group_id)]
-            data[message.media_group_id] = MediaGroup(
+            storage_data[message.media_group_id] = MediaGroup(
                 caption=store.caption,
                 photos=store.photos,
                 audio=store.audio,
                 documents=store.documents,
             )
-            await self._storage.set_data(context_key, data=data)
+            await self._storage.set_data(context_key, data=storage_data)
             return await handler(message, data)
 
     async def add_media(self, message: Message):
@@ -125,7 +125,7 @@ class MediaGroupObserver:
 class MediaGroupStore:
     """Media message store"""
 
-    caption: t.Optional[str] = property(lambda self: self._caption[:])
+    caption: t.Optional[str] = property(lambda self: self._caption)
     photos: list[list[PhotoSize]] = property(lambda self: self._photos[:])
     audio: list[Audio] = property(lambda self: self._audio[:])
     documents: list[Document] = property(lambda self: self._documents[:])
