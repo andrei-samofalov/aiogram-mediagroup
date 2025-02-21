@@ -24,6 +24,9 @@ import typing as t
 from aiogram.types import PhotoSize, Audio, Document, Video
 from aiogram.enums import ContentType
 
+MediaGroupType = list[InputMediaAudio | InputMediaDocument | InputMediaPhoto | InputMediaVideo]
+MediaType = list[PhotoSize] | Audio | Document | Video
+
 @dataclass(slots=True, kw_only=True, frozen=True)
 class MediaGroup:
     """Lightweight media group representation."""
@@ -32,19 +35,20 @@ class MediaGroup:
     audio: list[Audio] = field(default_factory=list)
     documents: list[Document] = field(default_factory=list)
     video: list[Video] = field(default_factory=list)
-
+    
+    def get_media(self) -> t.Iterator[MediaType]:
+        """Return media group iterator"""
+        ...
+    
+    def as_input_media(self) -> MediaGroupType:
+        """Return media group for sending via aiogram.Bot"""
+        ...
+        
     @property
-    def content_type(self) -> str:
+    def content_type(self) -> ContentType:
         """Return media group content type"""
-        if self.photos:
-            return ContentType.PHOTO
-        if self.documents:
-            return ContentType.DOCUMENT
-        if self.audio:
-            return ContentType.AUDIO
-        if self.video:
-            return ContentType.VIDEO
-        return ContentType.UNKNOWN
+        ...
+
 ```
 
 ## Usage
@@ -72,7 +76,10 @@ router = Router()
 async def media_group_handler(message: Message, state: FSMContext):
     data = await state.get_data()
     media_data: MediaGroup = data[message.media_group_id]
-    # Process the media group data here
+    # Process the media group data here...
+    
+    # f.e. answer with media
+    await message.answer_media_group(media=media_data.as_input_media())
 ```
 
 ## Installation
