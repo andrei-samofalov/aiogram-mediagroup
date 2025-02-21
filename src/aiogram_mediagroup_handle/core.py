@@ -14,7 +14,7 @@ from aiogram_mediagroup_handle._types import Handler, PhotoSize, Document, Video
 from aiogram_mediagroup_handle.media import MediaGroup
 from aiogram_mediagroup_handle.middleware import MediaGroupMiddleware
 
-DEFAULT_TIMEOUT = 0.3
+DEFAULT_TIMEOUT = 0.05
 _action_map = {
     ContentType.AUDIO: lambda self, message: self._audio.append(
         Audio.model_validate(message.audio.model_dump())
